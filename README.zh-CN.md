@@ -361,6 +361,16 @@ CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:scripts:tests \
   "$LVLN_AGENT_PYTHON" -B -m unittest discover -s tests -q
 ```
 
+## 自动检查与发布版本
+
+向 `main` 推送或提交 Pull Request 时，[CPU 测试](.github/workflows/cpu-tests.yml)会在 GitHub 提供的运行器上自动执行，也可从 Actions 页面手动启动。只安装控制环境依赖，不启动模型或仿真。
+
+固定发布版本标记为 `v0.1.0`。需要使用此版本时，在没有未提交修改的检出目录执行：
+
+```bash
+git checkout v0.1.0
+```
+
 ## 致谢与许可
 
 感谢 [UAV-ON](https://github.com/Kyaren/UAV_ON)、[Qwen](https://huggingface.co/Qwen) 与 [vLLM](https://github.com/vllm-project/vllm) 提供 benchmark、模型与推理基础设施。上游评分参考与署名保留在 `third_party/UAV-ON/`。
