@@ -1,0 +1,3120 @@
+{
+  "benchmark": "uavon",
+  "episodes": {
+    "blocked": {
+      "decisions": [
+        {
+          "current_motion_options": null,
+          "current_target_evidence": null,
+          "decision": {
+            "action": "initial_yaw",
+            "yaw_degrees": 90
+          },
+          "execution": {
+            "budget_cost": 1,
+            "displacement_m": 0.0,
+            "final_heading_degrees": 90.0,
+            "initial_heading_degrees": 0.0,
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "position_ned_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "sensor_after_rotation": {},
+            "status": "initial_yaw_completed",
+            "travel_m": 0.0,
+            "yaw_error_degrees": 0.0,
+            "yaw_requested_degrees": 90
+          },
+          "iteration": 0,
+          "sensor": {}
+        },
+        {
+          "current_motion_options": null,
+          "current_target_evidence": [],
+          "decision": {
+            "action": "horizontal_explore",
+            "bbox": [
+              400,
+              400,
+              600,
+              600
+            ],
+            "memory": "保持线索",
+            "reason": "检查区域",
+            "target_id": null,
+            "vertical_direction": null,
+            "view": "front"
+          },
+          "execution": {
+            "ascent_guard": {
+              "guidance": "上升产生位移不等于搜索有收益。再次升高前检查新图是否改善目标证据或视野，不要重复沿用上次升高理由。",
+              "horizontal_from_anchor_m": 0.0,
+              "reset_horizontal_m": 3.0,
+              "rise_from_spawn_m": 0.0,
+              "up_explore_allowed": true,
+              "up_explores_at_anchor": 0,
+              "up_explores_limit": 2,
+              "up_gain_at_anchor_m": 0.0
+            },
+            "avoid_moves": [
+              {
+                "direction_ned": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "origin_ned_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            ],
+            "control_commands": 0,
+            "displacement_m": 0.0,
+            "goal_ned_m": [
+              0.0,
+              6.0,
+              0.0
+            ],
+            "grounded_distance_m": null,
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "no_progress_rounds": 1,
+            "position_ned_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "status": "blocked",
+            "stop": {},
+            "travel_m": 0.0
+          },
+          "grounded_surface_ned_m": null,
+          "history_turns": 1,
+          "iteration": 1,
+          "sensor": {}
+        },
+        {
+          "current_motion_options": null,
+          "current_target_evidence": [],
+          "decision": {
+            "action": "horizontal_explore",
+            "bbox": [
+              400,
+              400,
+              600,
+              600
+            ],
+            "memory": "保持线索",
+            "reason": "检查区域",
+            "target_id": null,
+            "vertical_direction": null,
+            "view": "front"
+          },
+          "execution": {
+            "ascent_guard": {
+              "guidance": "上升产生位移不等于搜索有收益。再次升高前检查新图是否改善目标证据或视野，不要重复沿用上次升高理由。",
+              "horizontal_from_anchor_m": 0.0,
+              "reset_horizontal_m": 3.0,
+              "rise_from_spawn_m": 0.0,
+              "up_explore_allowed": true,
+              "up_explores_at_anchor": 0,
+              "up_explores_limit": 2,
+              "up_gain_at_anchor_m": 0.0
+            },
+            "avoid_moves": [
+              {
+                "direction_ned": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "origin_ned_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            ],
+            "displacement_m": 0.0,
+            "goal_ned_m": [
+              0.0,
+              6.0,
+              0.0
+            ],
+            "grounded_distance_m": null,
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "no_progress_rounds": 2,
+            "position_ned_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "status": "repeated_blocked_direction"
+          },
+          "grounded_surface_ned_m": null,
+          "history_turns": 2,
+          "iteration": 2,
+          "sensor": {}
+        },
+        {
+          "current_motion_options": {
+            "active": false,
+            "moves": [],
+            "targets": []
+          },
+          "current_target_evidence": [],
+          "decision": {
+            "action": "horizontal_explore",
+            "bbox": [
+              400,
+              400,
+              600,
+              600
+            ],
+            "memory": "保持线索",
+            "reason": "检查区域",
+            "target_id": null,
+            "vertical_direction": null,
+            "view": "front"
+          },
+          "execution": {
+            "ascent_guard": {
+              "guidance": "上升产生位移不等于搜索有收益。再次升高前检查新图是否改善目标证据或视野，不要重复沿用上次升高理由。",
+              "horizontal_from_anchor_m": 0.0,
+              "reset_horizontal_m": 3.0,
+              "rise_from_spawn_m": 0.0,
+              "up_explore_allowed": true,
+              "up_explores_at_anchor": 0,
+              "up_explores_limit": 2,
+              "up_gain_at_anchor_m": 0.0
+            },
+            "avoid_moves": [
+              {
+                "direction_ned": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "origin_ned_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            ],
+            "displacement_m": 0.0,
+            "goal_ned_m": [
+              0.0,
+              6.0,
+              0.0
+            ],
+            "grounded_distance_m": null,
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "no_progress_rounds": 3,
+            "position_ned_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "status": "repeated_blocked_direction"
+          },
+          "grounded_surface_ned_m": null,
+          "history_turns": 3,
+          "iteration": 3,
+          "sensor": {}
+        },
+        {
+          "current_motion_options": {
+            "active": false,
+            "moves": [],
+            "targets": []
+          },
+          "current_target_evidence": [],
+          "decision": {
+            "action": "horizontal_explore",
+            "bbox": [
+              400,
+              400,
+              600,
+              600
+            ],
+            "memory": "保持线索",
+            "reason": "检查区域",
+            "target_id": null,
+            "vertical_direction": null,
+            "view": "front"
+          },
+          "execution": {
+            "ascent_guard": {
+              "guidance": "上升产生位移不等于搜索有收益。再次升高前检查新图是否改善目标证据或视野，不要重复沿用上次升高理由。",
+              "horizontal_from_anchor_m": 0.0,
+              "reset_horizontal_m": 3.0,
+              "rise_from_spawn_m": 0.0,
+              "up_explore_allowed": true,
+              "up_explores_at_anchor": 0,
+              "up_explores_limit": 2,
+              "up_gain_at_anchor_m": 0.0
+            },
+            "avoid_moves": [
+              {
+                "direction_ned": [
+                  0.0,
+                  1.0,
+                  0.0
+                ],
+                "origin_ned_m": [
+                  0.0,
+                  0.0,
+                  0.0
+                ]
+              }
+            ],
+            "displacement_m": 0.0,
+            "goal_ned_m": [
+              0.0,
+              6.0,
+              0.0
+            ],
+            "grounded_distance_m": null,
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "no_progress_rounds": 4,
+            "position_ned_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "status": "repeated_blocked_direction"
+          },
+          "grounded_surface_ned_m": null,
+          "history_turns": 4,
+          "iteration": 4,
+          "sensor": {}
+        }
+      ],
+      "events": [
+        [
+          "hold"
+        ],
+        [
+          "face",
+          1.57079633
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ],
+        [
+          "face",
+          1.57079633
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ]
+      ],
+      "metrics": {
+        "comparable_official_metrics": false,
+        "diagnostic_15m": {
+          "oracle_success": true,
+          "success": false
+        },
+        "diagnostic_only": false,
+        "final_distance_m": 10.19803903,
+        "geodesic_distance_m": 10,
+        "metric_protocol": "simple_agent_physics_v6_directional_explore",
+        "min_sampled_distance_m": 10.19803903,
+        "ne_m": 10.19803903,
+        "oracle_sample_basis": "decision_endpoints",
+        "oracle_success": true,
+        "path_length_reference": "dataset_original_spawn_geodesic",
+        "sampled_path_length_m": 0.0,
+        "spl": 0.0,
+        "success": false,
+        "success_distance_m": 20,
+        "trajectory_samples": 16,
+        "upstream_commit": "d7ccf795033a577549d12fae173c149ef38d08a7"
+      },
+      "summary": {
+        "ascent_guard_resets": 0,
+        "ascent_guard_runtime_blocks": 0,
+        "decisions": 5,
+        "initial_rotation_actions": 1,
+        "method_options": {
+          "ascent_guard": true,
+          "guard_scope": "vertical_explore_up_only",
+          "height_envelope": false,
+          "initial_rotation_budget": "one_of_total_decisions",
+          "initial_yaw90": true,
+          "max_up_explores": 2,
+          "reset_horizontal_m": 3.0
+        },
+        "method_version": "uavon_minimal_v1",
+        "navigation_decisions": 4,
+        "position_ned_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "start_position_ned_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "status": "decision_limit",
+        "travel_m": 0.0
+      },
+      "trajectory": [
+        {
+          "event": "start",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 0,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "initial_yaw_after_braking",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "action": "initial_yaw",
+          "event": "decision_end",
+          "iteration": 0,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 1,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "after_yaw",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "after_braking",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "action": "horizontal_explore",
+          "event": "decision_end",
+          "iteration": 1,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 2,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "action": "horizontal_explore",
+          "event": "decision_end",
+          "iteration": 2,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 3,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "action": "horizontal_explore",
+          "event": "decision_end",
+          "iteration": 3,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 4,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "action": "horizontal_explore",
+          "event": "decision_end",
+          "iteration": 4,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "final",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    "collision": {
+      "decisions": [
+        {
+          "current_motion_options": null,
+          "current_target_evidence": null,
+          "decision": {
+            "action": "initial_yaw",
+            "yaw_degrees": 90
+          },
+          "execution": {
+            "budget_cost": 1,
+            "displacement_m": 0.0,
+            "final_heading_degrees": 90.0,
+            "initial_heading_degrees": 0.0,
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "position_ned_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "sensor_after_rotation": {},
+            "status": "initial_yaw_completed",
+            "travel_m": 0.0,
+            "yaw_error_degrees": 0.0,
+            "yaw_requested_degrees": 90
+          },
+          "iteration": 0,
+          "sensor": {}
+        },
+        {
+          "current_motion_options": null,
+          "current_target_evidence": [],
+          "decision": {
+            "action": "horizontal_explore",
+            "bbox": [
+              400,
+              400,
+              600,
+              600
+            ],
+            "memory": "保持线索",
+            "reason": "检查区域",
+            "target_id": null,
+            "vertical_direction": null,
+            "view": "front"
+          },
+          "execution": {
+            "ascent_guard": {
+              "guidance": "上升产生位移不等于搜索有收益。再次升高前检查新图是否改善目标证据或视野，不要重复沿用上次升高理由。",
+              "horizontal_from_anchor_m": 0.4,
+              "reset_horizontal_m": 3.0,
+              "rise_from_spawn_m": 0.0,
+              "up_explore_allowed": true,
+              "up_explores_at_anchor": 0,
+              "up_explores_limit": 2,
+              "up_gain_at_anchor_m": 0.0
+            },
+            "avoid_moves": [],
+            "control_commands": 2,
+            "displacement_m": 0.4,
+            "goal_ned_m": [
+              0.0,
+              6.0,
+              0.0
+            ],
+            "grounded_distance_m": null,
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "no_progress_rounds": 1,
+            "position_ned_m": [
+              0.0,
+              0.4,
+              0.0
+            ],
+            "status": "collision",
+            "stop": {},
+            "travel_m": 0.4
+          },
+          "grounded_surface_ned_m": null,
+          "history_turns": 1,
+          "iteration": 1,
+          "sensor": {}
+        }
+      ],
+      "events": [
+        [
+          "hold"
+        ],
+        [
+          "face",
+          1.57079633
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ],
+        [
+          "face",
+          1.57079633
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            1.0,
+            0.0
+          ],
+          0.2
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ]
+      ],
+      "metrics": {
+        "comparable_official_metrics": false,
+        "diagnostic_15m": {
+          "oracle_success": false,
+          "success": false
+        },
+        "diagnostic_only": false,
+        "final_distance_m": 10.20588066,
+        "geodesic_distance_m": 10,
+        "metric_protocol": "simple_agent_physics_v6_directional_explore",
+        "min_sampled_distance_m": 10.19803903,
+        "ne_m": 10.20588066,
+        "oracle_sample_basis": "decision_endpoints",
+        "oracle_success": false,
+        "path_length_reference": "dataset_original_spawn_geodesic",
+        "sampled_path_length_m": 0.4,
+        "spl": 0.0,
+        "success": false,
+        "success_distance_m": 20,
+        "trajectory_samples": 13,
+        "upstream_commit": "d7ccf795033a577549d12fae173c149ef38d08a7"
+      },
+      "summary": {
+        "ascent_guard_resets": 0,
+        "ascent_guard_runtime_blocks": 0,
+        "decisions": 2,
+        "initial_rotation_actions": 1,
+        "method_options": {
+          "ascent_guard": true,
+          "guard_scope": "vertical_explore_up_only",
+          "height_envelope": false,
+          "initial_rotation_budget": "one_of_total_decisions",
+          "initial_yaw90": true,
+          "max_up_explores": 2,
+          "reset_horizontal_m": 3.0
+        },
+        "method_version": "uavon_minimal_v1",
+        "navigation_decisions": 1,
+        "position_ned_m": [
+          0.0,
+          0.4,
+          0.0
+        ],
+        "start_position_ned_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "status": "collision",
+        "travel_m": 0.4
+      },
+      "trajectory": [
+        {
+          "event": "start",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 0,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "initial_yaw_after_braking",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "action": "initial_yaw",
+          "event": "decision_end",
+          "iteration": 0,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 1,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "after_yaw",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.2,
+            0.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.2,
+            0.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.4,
+            0.0
+          ]
+        },
+        {
+          "event": "after_braking",
+          "position_ned_m": [
+            0.0,
+            0.4,
+            0.0
+          ]
+        },
+        {
+          "action": "horizontal_explore",
+          "event": "decision_end",
+          "iteration": 1,
+          "position_ned_m": [
+            0.0,
+            0.4,
+            0.0
+          ]
+        },
+        {
+          "event": "final",
+          "position_ned_m": [
+            0.0,
+            0.4,
+            0.0
+          ]
+        }
+      ]
+    },
+    "spawn": {
+      "decisions": [],
+      "events": [
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ]
+      ],
+      "metrics": {
+        "comparable_official_metrics": false,
+        "diagnostic_15m": {
+          "oracle_success": false,
+          "success": false
+        },
+        "diagnostic_only": false,
+        "final_distance_m": 10.19803903,
+        "geodesic_distance_m": 10,
+        "metric_protocol": "simple_agent_physics_v6_directional_explore",
+        "min_sampled_distance_m": 10.19803903,
+        "ne_m": 10.19803903,
+        "oracle_sample_basis": "decision_endpoints",
+        "oracle_success": false,
+        "path_length_reference": "dataset_original_spawn_geodesic",
+        "sampled_path_length_m": 0.0,
+        "spl": 0.0,
+        "success": false,
+        "success_distance_m": 20,
+        "trajectory_samples": 2,
+        "upstream_commit": "d7ccf795033a577549d12fae173c149ef38d08a7"
+      },
+      "summary": {
+        "ascent_guard_resets": 0,
+        "ascent_guard_runtime_blocks": 0,
+        "decisions": 0,
+        "initial_rotation_actions": 0,
+        "method_options": {
+          "ascent_guard": true,
+          "guard_scope": "vertical_explore_up_only",
+          "height_envelope": false,
+          "initial_rotation_budget": "one_of_total_decisions",
+          "initial_yaw90": true,
+          "max_up_explores": 2,
+          "reset_horizontal_m": 3.0
+        },
+        "method_version": "uavon_minimal_v1",
+        "navigation_decisions": 0,
+        "position_ned_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "start_position_ned_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "status": "collision",
+        "travel_m": 0.0
+      },
+      "trajectory": [
+        {
+          "event": "start",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "final",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    "stop": {
+      "decisions": [
+        {
+          "current_motion_options": null,
+          "current_target_evidence": null,
+          "decision": {
+            "action": "initial_yaw",
+            "yaw_degrees": 90
+          },
+          "execution": {
+            "budget_cost": 1,
+            "displacement_m": 0.0,
+            "final_heading_degrees": 90.0,
+            "initial_heading_degrees": 0.0,
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "position_ned_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "sensor_after_rotation": {},
+            "status": "initial_yaw_completed",
+            "travel_m": 0.0,
+            "yaw_error_degrees": 0.0,
+            "yaw_requested_degrees": 90
+          },
+          "iteration": 0,
+          "sensor": {}
+        },
+        {
+          "current_motion_options": null,
+          "current_target_evidence": [
+            {
+              "attributes_match": true,
+              "bbox": [
+                400,
+                400,
+                600,
+                600
+              ],
+              "class_match": true,
+              "evidence": "目标清晰",
+              "groundable": true,
+              "grounded_distance_m": 8.0,
+              "match": "confirmed",
+              "physical_object": true,
+              "target_id": "frame_1_target_0",
+              "view": "front"
+            }
+          ],
+          "decision": {
+            "action": "stop",
+            "bbox": [
+              400,
+              400,
+              600,
+              600
+            ],
+            "memory": "保持线索",
+            "reason": "检查区域",
+            "target_id": "frame_1_target_0",
+            "vertical_direction": null,
+            "view": "front"
+          },
+          "execution": {
+            "ascent_guard": {
+              "guidance": "上升产生位移不等于搜索有收益。再次升高前检查新图是否改善目标证据或视野，不要重复沿用上次升高理由。",
+              "horizontal_from_anchor_m": 0.0,
+              "reset_horizontal_m": 3.0,
+              "rise_from_spawn_m": 0.0,
+              "up_explore_allowed": true,
+              "up_explores_at_anchor": 0,
+              "up_explores_limit": 2,
+              "up_gain_at_anchor_m": 0.0
+            },
+            "avoid_moves": [],
+            "displacement_m": 0.0,
+            "grounded_distance_m": 8.0,
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "no_progress_rounds": 1,
+            "position_ned_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "status": "stop"
+          },
+          "grounded_surface_ned_m": [
+            0.24975622,
+            7.99219893,
+            -0.24975622
+          ],
+          "history_turns": 1,
+          "iteration": 1,
+          "sensor": {}
+        }
+      ],
+      "events": [
+        [
+          "hold"
+        ],
+        [
+          "face",
+          1.57079633
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ]
+      ],
+      "metrics": {
+        "comparable_official_metrics": false,
+        "diagnostic_15m": {
+          "oracle_success": true,
+          "success": true
+        },
+        "diagnostic_only": false,
+        "final_distance_m": 10.19803903,
+        "geodesic_distance_m": 10,
+        "metric_protocol": "simple_agent_physics_v6_directional_explore",
+        "min_sampled_distance_m": 10.19803903,
+        "ne_m": 10.19803903,
+        "oracle_sample_basis": "decision_endpoints",
+        "oracle_success": true,
+        "path_length_reference": "dataset_original_spawn_geodesic",
+        "sampled_path_length_m": 0.0,
+        "spl": 0.0,
+        "success": true,
+        "success_distance_m": 20,
+        "trajectory_samples": 7,
+        "upstream_commit": "d7ccf795033a577549d12fae173c149ef38d08a7"
+      },
+      "summary": {
+        "ascent_guard_resets": 0,
+        "ascent_guard_runtime_blocks": 0,
+        "decisions": 2,
+        "initial_rotation_actions": 1,
+        "method_options": {
+          "ascent_guard": true,
+          "guard_scope": "vertical_explore_up_only",
+          "height_envelope": false,
+          "initial_rotation_budget": "one_of_total_decisions",
+          "initial_yaw90": true,
+          "max_up_explores": 2,
+          "reset_horizontal_m": 3.0
+        },
+        "method_version": "uavon_minimal_v1",
+        "navigation_decisions": 1,
+        "position_ned_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "start_position_ned_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "status": "stop",
+        "travel_m": 0.0
+      },
+      "trajectory": [
+        {
+          "event": "start",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 0,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "initial_yaw_after_braking",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "action": "initial_yaw",
+          "event": "decision_end",
+          "iteration": 0,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 1,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "action": "stop",
+          "event": "decision_end",
+          "iteration": 1,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "final",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    "up": {
+      "decisions": [
+        {
+          "current_motion_options": null,
+          "current_target_evidence": null,
+          "decision": {
+            "action": "initial_yaw",
+            "yaw_degrees": 90
+          },
+          "execution": {
+            "budget_cost": 1,
+            "displacement_m": 0.0,
+            "final_heading_degrees": 90.0,
+            "initial_heading_degrees": 0.0,
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "position_ned_m": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "sensor_after_rotation": {},
+            "status": "initial_yaw_completed",
+            "travel_m": 0.0,
+            "yaw_error_degrees": 0.0,
+            "yaw_requested_degrees": 90
+          },
+          "iteration": 0,
+          "sensor": {}
+        },
+        {
+          "current_motion_options": null,
+          "current_target_evidence": [],
+          "decision": {
+            "action": "vertical_explore",
+            "bbox": [
+              400,
+              400,
+              600,
+              600
+            ],
+            "memory": "保持线索",
+            "reason": "检查区域",
+            "target_id": null,
+            "vertical_direction": "up",
+            "view": "front"
+          },
+          "execution": {
+            "ascent_guard": {
+              "guidance": "上升产生位移不等于搜索有收益。再次升高前检查新图是否改善目标证据或视野，不要重复沿用上次升高理由。",
+              "horizontal_from_anchor_m": 0.0,
+              "reset_horizontal_m": 3.0,
+              "rise_from_spawn_m": 5.6,
+              "up_explore_allowed": true,
+              "up_explores_at_anchor": 1,
+              "up_explores_limit": 2,
+              "up_gain_at_anchor_m": 5.6
+            },
+            "avoid_moves": [],
+            "control_commands": 28,
+            "displacement_m": 5.6,
+            "goal_ned_m": [
+              0.0,
+              0.0,
+              -6.0
+            ],
+            "grounded_distance_m": null,
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "no_progress_rounds": 0,
+            "position_ned_m": [
+              0.0,
+              0.0,
+              -5.6
+            ],
+            "status": "reached",
+            "stop": {},
+            "travel_m": 5.6
+          },
+          "grounded_surface_ned_m": null,
+          "history_turns": 1,
+          "iteration": 1,
+          "sensor": {}
+        },
+        {
+          "current_motion_options": null,
+          "current_target_evidence": [],
+          "decision": {
+            "action": "vertical_explore",
+            "bbox": [
+              400,
+              400,
+              600,
+              600
+            ],
+            "memory": "保持线索",
+            "reason": "检查区域",
+            "target_id": null,
+            "vertical_direction": "up",
+            "view": "front"
+          },
+          "execution": {
+            "ascent_guard": {
+              "guidance": "同一水平位置反复上升没有证明搜索取得收益。上升探索预算已用完，请选择其他合法动作；实际水平换位后恢复资格。",
+              "horizontal_from_anchor_m": 0.0,
+              "reset_horizontal_m": 3.0,
+              "rise_from_spawn_m": 11.2,
+              "up_explore_allowed": false,
+              "up_explores_at_anchor": 2,
+              "up_explores_limit": 2,
+              "up_gain_at_anchor_m": 11.2
+            },
+            "avoid_moves": [],
+            "control_commands": 28,
+            "displacement_m": 5.6,
+            "goal_ned_m": [
+              0.0,
+              0.0,
+              -11.6
+            ],
+            "grounded_distance_m": null,
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "no_progress_rounds": 0,
+            "position_ned_m": [
+              0.0,
+              0.0,
+              -11.2
+            ],
+            "status": "reached",
+            "stop": {},
+            "travel_m": 5.6
+          },
+          "grounded_surface_ned_m": null,
+          "history_turns": 2,
+          "iteration": 2,
+          "sensor": {}
+        },
+        {
+          "current_motion_options": null,
+          "current_target_evidence": [],
+          "decision": {
+            "action": "vertical_explore",
+            "bbox": [
+              400,
+              400,
+              600,
+              600
+            ],
+            "memory": "保持线索",
+            "reason": "检查区域",
+            "target_id": null,
+            "vertical_direction": "up",
+            "view": "front"
+          },
+          "execution": {
+            "ascent_guard": {
+              "guidance": "同一水平位置反复上升没有证明搜索取得收益。上升探索预算已用完，请选择其他合法动作；实际水平换位后恢复资格。",
+              "horizontal_from_anchor_m": 0.0,
+              "reset_horizontal_m": 3.0,
+              "rise_from_spawn_m": 11.2,
+              "up_explore_allowed": false,
+              "up_explores_at_anchor": 2,
+              "up_explores_limit": 2,
+              "up_gain_at_anchor_m": 11.2
+            },
+            "avoid_moves": [],
+            "displacement_m": 0.0,
+            "error": "重复上升保护：同一水平位置已用完上升探索预算，须实际水平换位后恢复",
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "no_progress_rounds": 1,
+            "position_ned_m": [
+              0.0,
+              0.0,
+              -11.2
+            ],
+            "status": "invalid_decision_or_depth"
+          },
+          "grounded_surface_ned_m": null,
+          "history_turns": 3,
+          "iteration": 3,
+          "sensor": {}
+        },
+        {
+          "current_motion_options": null,
+          "current_target_evidence": [],
+          "decision": {
+            "action": "vertical_explore",
+            "bbox": [
+              400,
+              400,
+              600,
+              600
+            ],
+            "memory": "保持线索",
+            "reason": "检查区域",
+            "target_id": null,
+            "vertical_direction": "up",
+            "view": "front"
+          },
+          "execution": {
+            "ascent_guard": {
+              "guidance": "同一水平位置反复上升没有证明搜索取得收益。上升探索预算已用完，请选择其他合法动作；实际水平换位后恢复资格。",
+              "horizontal_from_anchor_m": 0.0,
+              "reset_horizontal_m": 3.0,
+              "rise_from_spawn_m": 11.2,
+              "up_explore_allowed": false,
+              "up_explores_at_anchor": 2,
+              "up_explores_limit": 2,
+              "up_gain_at_anchor_m": 11.2
+            },
+            "avoid_moves": [],
+            "displacement_m": 0.0,
+            "error": "重复上升保护：同一水平位置已用完上升探索预算，须实际水平换位后恢复",
+            "motion_policy": {
+              "horizontal_explore": "direction_only_keep_altitude",
+              "max_step_len_m": 6.0,
+              "stop_distance_m": 10.0,
+              "target_standoff_m": 2.0,
+              "vertical_explore": "up_blind_down_observed"
+            },
+            "no_progress_rounds": 2,
+            "position_ned_m": [
+              0.0,
+              0.0,
+              -11.2
+            ],
+            "status": "invalid_decision_or_depth"
+          },
+          "grounded_surface_ned_m": null,
+          "history_turns": 4,
+          "iteration": 4,
+          "sensor": {}
+        }
+      ],
+      "events": [
+        [
+          "hold"
+        ],
+        [
+          "face",
+          1.57079633
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ],
+        [
+          "face",
+          1.57079633
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ],
+        [
+          "face",
+          1.57079633
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "advance",
+          [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          0.2
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ],
+        [
+          "hold"
+        ]
+      ],
+      "metrics": {
+        "comparable_official_metrics": false,
+        "diagnostic_15m": {
+          "oracle_success": true,
+          "success": false
+        },
+        "diagnostic_only": false,
+        "final_distance_m": 13.5882302,
+        "geodesic_distance_m": 10,
+        "metric_protocol": "simple_agent_physics_v6_directional_explore",
+        "min_sampled_distance_m": 10.0,
+        "ne_m": 13.5882302,
+        "oracle_sample_basis": "decision_endpoints",
+        "oracle_success": true,
+        "path_length_reference": "dataset_original_spawn_geodesic",
+        "sampled_path_length_m": 11.2,
+        "spl": 0.0,
+        "success": false,
+        "success_distance_m": 20,
+        "trajectory_samples": 131,
+        "upstream_commit": "d7ccf795033a577549d12fae173c149ef38d08a7"
+      },
+      "summary": {
+        "ascent_guard_resets": 0,
+        "ascent_guard_runtime_blocks": 2,
+        "decisions": 5,
+        "initial_rotation_actions": 1,
+        "method_options": {
+          "ascent_guard": true,
+          "guard_scope": "vertical_explore_up_only",
+          "height_envelope": false,
+          "initial_rotation_budget": "one_of_total_decisions",
+          "initial_yaw90": true,
+          "max_up_explores": 2,
+          "reset_horizontal_m": 3.0
+        },
+        "method_version": "uavon_minimal_v1",
+        "navigation_decisions": 4,
+        "position_ned_m": [
+          0.0,
+          0.0,
+          -11.2
+        ],
+        "start_position_ned_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "status": "decision_limit",
+        "travel_m": 11.2
+      },
+      "trajectory": [
+        {
+          "event": "start",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 0,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "initial_yaw_after_braking",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "action": "initial_yaw",
+          "event": "decision_end",
+          "iteration": 0,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 1,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "after_yaw",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -0.2
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -0.2
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -0.4
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -0.4
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -0.6
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -0.6
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -0.8
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -0.8
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -1.2
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -1.2
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -1.4
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -1.4
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -1.6
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -1.6
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -1.8
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -1.8
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -2.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -2.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -2.2
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -2.2
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -2.4
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -2.4
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -2.6
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -2.6
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -2.8
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -2.8
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -3.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -3.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -3.2
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -3.2
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -3.4
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -3.4
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -3.6
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -3.6
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -3.8
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -3.8
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -4.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -4.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -4.2
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -4.2
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -4.4
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -4.4
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -4.6
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -4.6
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -4.8
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -4.8
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.2
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.2
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.4
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.4
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.6
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.6
+          ]
+        },
+        {
+          "event": "after_braking",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.6
+          ]
+        },
+        {
+          "action": "vertical_explore",
+          "event": "decision_end",
+          "iteration": 1,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.6
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 2,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.6
+          ]
+        },
+        {
+          "event": "after_yaw",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.6
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.6
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.8
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -5.8
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -6.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -6.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -6.2
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -6.2
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -6.4
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -6.4
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -6.6
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -6.6
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -6.8
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -6.8
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -7.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -7.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -7.2
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -7.2
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -7.4
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -7.4
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -7.6
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -7.6
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -7.8
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -7.8
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -8.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -8.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -8.2
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -8.2
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -8.4
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -8.4
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -8.6
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -8.6
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -8.8
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -8.8
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -9.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -9.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -9.2
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -9.2
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -9.4
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -9.4
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -9.6
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -9.6
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -9.8
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -9.8
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -10.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -10.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -10.2
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -10.2
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -10.4
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -10.4
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -10.6
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -10.6
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -10.8
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -10.8
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -11.0
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -11.0
+          ]
+        },
+        {
+          "event": "command_completed",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -11.2
+          ]
+        },
+        {
+          "event": "control_observation",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -11.2
+          ]
+        },
+        {
+          "event": "after_braking",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -11.2
+          ]
+        },
+        {
+          "action": "vertical_explore",
+          "event": "decision_end",
+          "iteration": 2,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -11.2
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 3,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -11.2
+          ]
+        },
+        {
+          "action": "vertical_explore",
+          "event": "decision_end",
+          "iteration": 3,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -11.2
+          ]
+        },
+        {
+          "event": "decision_observation",
+          "iteration": 4,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -11.2
+          ]
+        },
+        {
+          "action": "vertical_explore",
+          "event": "decision_end",
+          "iteration": 4,
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -11.2
+          ]
+        },
+        {
+          "event": "final",
+          "position_ned_m": [
+            0.0,
+            0.0,
+            -11.2
+          ]
+        }
+      ]
+    }
+  },
+  "requests": [
+    {
+      "phase": "target_localization",
+      "sha256": "3ef966421f3b0da28c90214fff0a0e62f598b862122f889139b35b78d5afd15f"
+    },
+    {
+      "phase": "navigation_decision",
+      "sha256": "79ef718405df062d73ca9301d3579b3eca482083c3419a578fdd9e19080d1df8"
+    },
+    {
+      "phase": "navigation_decision",
+      "sha256": "705036924590ec7e31f4fb003033a358c1b4c58fa2f8047cebdd663764d96bac"
+    },
+    {
+      "phase": "navigation_decision",
+      "sha256": "493210bb880e9846d39f30b2c287137ee385a1be3bc199ed3f907ecea1982352"
+    }
+  ]
+}

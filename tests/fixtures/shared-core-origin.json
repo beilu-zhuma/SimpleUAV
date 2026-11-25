@@ -1,0 +1,19 @@
+{
+  "protocol": "pre-refactor-uavon-cpu-replay-v1",
+  "source_snapshot": "整理版源码，重构开始前冻结；非本次重构实现生成",
+  "prompt_sha256": {
+    "system": "16ddc0501369aa7d58f407ba8507aaf7a9474a51295223f72ced2fbd4e4990da",
+    "localize": "8be33a23e4b267f046f43ebe1ff75f88a5a1baa60f3e681851e399de1dd6d87f",
+    "evidence": "bd9296dc71bc26c5b4c770faa83df4bd462e3b70c5147b65aae81d4a79226b2e",
+    "motion": "9673d31c07676b553528f0523760c2c47a6bb73165c3fa38be7b5cf4b807a97b",
+    "guard": "aa992cdda71c269432ac4f8760119ee9904e9de1ce202a4a3c88fd154cfb3b52"
+  },
+  "source_sha256": {
+    "src/lightning_vln/vlm.py": "03ebc37defa1657fa9b6f967468fc76026af0b4dee9451e18604b8e195bc7680",
+    "src/lightning_vln/evidence.py": "c112675e50b67395ffc2e12f07deed49bf8d8fc1ffc690cb8668206f8d25c53d",
+    "src/lightning_vln/motion_options.py": "990336706940148ecd53790258cee924863ae0454b33da0c0c9e84815eee6e9a",
+    "src/lightning_vln/uavon_minimal/vlm.py": "884b58bc05eba8a43efd58d907d30170e041c40939e0dbccdc6b4a81b98e8000",
+    "src/lightning_vln/agent.py": "3befd6bf8c42bf1880634d3c8d29a3702327f85bef7159558acb1e4737951ce2",
+    "src/lightning_vln/uavon_minimal/agent.py": "af094438db8b2da53d88f76f9c20bbe7c992d9c9b8b715d9db2390f4f4062602"
+  }
+}

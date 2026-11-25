@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "benchmark": "uavon",
+  "gpus": [0],
+  "concurrency": 4,
+  "record_mode": "metrics-only",
+  "method": {"initial_yaw90": false},
+  "ports": {"model": 18630, "scene": 30310},
+  "paths": {
+    "python": "/envs/uavon/bin/python",
+    "model_python": "/envs/vllm/bin/python",
+    "annotations": "/datasets/uavon/DATASET/UAV-ON-data/valset",
+    "scenes": "/datasets/uavon/TEST_ENVS",
+    "vulkan_icd": ""
+  },
+  "models": [{"name": "qwen36", "path": "/models/Qwen3.6-35B-A3B-FP8"}],
+  "serving": {"gpu_memory_utilization": 0.70, "max_num_seqs": 12}
+}

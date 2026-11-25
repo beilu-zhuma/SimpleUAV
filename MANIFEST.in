@@ -1,0 +1,11 @@
+include LICENSE README.md README.zh-CN.md pyproject.toml
+recursive-include src *.py *.json
+recursive-include scripts *.py
+recursive-include configs/experiments *.json
+recursive-include requirements *.txt
+recursive-include third_party/UAV-ON *
+recursive-include docs *.md *.json *.svg *.png *.pdf
+recursive-include tests *.py *.json
+prune configs/local
+global-exclude *.local.json *.pyc *.pyo *.log
+global-exclude SERVER_NOTES.md
