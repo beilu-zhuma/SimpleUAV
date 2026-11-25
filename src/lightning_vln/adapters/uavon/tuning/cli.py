@@ -106,7 +106,7 @@ def main():
     except ValueError as error:
         parser.error(str(error))
     if (options.initial_yaw90 or options.ascent_guard) and not args.current_target_evidence:
-        parser.error("小改动实验须保留原两阶段方法，提供 --current-target-evidence")
+        parser.error("SimpleUAV主方法需要两阶段推理，请提供 --current-target-evidence")
     if args.motion_options and not args.current_target_evidence:
         parser.error("--motion-options 需要 --current-target-evidence")
     if args.frame_manifest and (not args.dataset or not args.scene):

@@ -7,6 +7,7 @@ python scripts/experiment.py run --output /results/uavon-main
 ```
 
 - 配置由`uavon.example.json`复制，填写解释器、valset、TEST_ENVS和已授权GPU。
+- 部分评测添加`"selection": {"count": 10, "seed": 20261116}`；需要完整标注，但只检查实际抽中场景的仿真包。
 - 1000条排除四个问题场景后固定733条，不抽样、不补齐。
 - 150决策、两阶段、历史4轮/文字记忆、上升保护/深度安全；初始90°旋转默认关闭、STOP10m、单段6m、出生+2m。
 - JSON配置`"method": {"initial_yaw90": true}`开启开局旋转；`false`或省略关闭。开启占1次总预算，关闭不转且不注入旋转前图片。低层CLI仅在显式传`--initial-yaw90`时开启。
@@ -15,5 +16,6 @@ python scripts/experiment.py run --output /results/uavon-main
 - SR/OSR/SPL/NE全部保留；官方20m与原geodesic distance，注明adjusted protocol。
 - 配置示例采用单卡4路并发，需按实际模型与仿真总负载调整。多卡使用设备隔离，不能由显存或max-num-seqs直接推算并发。
 - `stop`等待自有资源退出，`resume`继承登记结算并写新attempt，不覆盖旧记录。
+- 修改仓库Python源码后执行`python scripts/experiment.py refresh-source`，再`check/prepare`新的输出目录；冻结运行目录禁止刷新。
 
 完整口径见[评测协议](../benchmarks.md)。

@@ -1,0 +1,9 @@
+{
+  "prompt_sha256": {
+    "system": "16ddc0501369aa7d58f407ba8507aaf7a9474a51295223f72ced2fbd4e4990da",
+    "localize": "8be33a23e4b267f046f43ebe1ff75f88a5a1baa60f3e681851e399de1dd6d87f",
+    "evidence": "bd9296dc71bc26c5b4c770faa83df4bd462e3b70c5147b65aae81d4a79226b2e",
+    "motion": "9673d31c07676b553528f0523760c2c47a6bb73165c3fa38be7b5cf4b807a97b",
+    "guard": "aa992cdda71c269432ac4f8760119ee9904e9de1ce202a4a3c88fd154cfb3b52"
+  }
+}

@@ -1,4 +1,4 @@
-# UAV-ON控制依赖；模型推理环境独立。
-numpy>=1.24,<2
-Pillow
-msgpack>=1,<2
+# Python 3.12控制环境；模型推理依赖单独安装。
+numpy==1.26.4
+Pillow==13.0.0
+msgpack==1.2.3

@@ -22,6 +22,6 @@ def run(root, resume=False):
     contract = verify_output(root)
     config = read(root/'machine-config.json')
     if contract['benchmark'] != 'uavon' or config.get('benchmark') != 'uavon':
-        raise ValueError('uavon-only分支只接续UAV-ON实验')
+        raise ValueError('SimpleUAV只接续UAV-ON运行')
     from .uavon import run as run_uavon
     return run_uavon(root, config, resume)

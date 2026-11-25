@@ -82,3 +82,30 @@ class MainReleaseTests(unittest.TestCase):
                 try:self.assertTrue(alive(record))
                 finally:child.close()
                 self.assertFalse(alive(record))
+
+    def test_subset_requires_only_selected_scene_packages(self):
+            from portable_experiments.selection import select
+            from lightning_vln.benchmark import TEST_SCENES
+            tasks=[dict(episode_id='nyc',map_name='NYC_test'),
+                   dict(episode_id='barn',map_name='Barnyard_test')]
+            manifest=dict(excluded_ids=[],source_files_sha256={})
+            with tempfile.TemporaryDirectory() as directory:
+                root=Path(directory);cfg=copy.deepcopy(self.config())
+                cfg['paths'].update(python=sys.executable,model_python=sys.executable,
+                                    annotations=str(root/'annotations'),scenes=str(root/'scenes'))
+                cfg['models'][0]['path']=str(root/'model')
+                core.save(root/'model/config.json',{})
+                cfg['selection']=dict(count=1,seed=42)
+                chosen,_=select(tasks,cfg,identity='episode_id')
+                script=root/'scenes'/TEST_SCENES[chosen[0]['map_name']]
+                script.parent.mkdir(parents=True);script.write_text('#!/bin/sh\n')
+                modules=json.dumps({n:True for n in ('numpy','PIL','msgpack','torch','vllm')})
+                with patch.object(uavon,'build_inputs',return_value=(tasks,manifest)),\
+                     patch.object(uavon.shutil,'which',return_value='/usr/bin/bwrap'),\
+                     patch.object(uavon.subprocess,'run',return_value=type('Result',(),{'stdout':modules})()):
+                    result=uavon.check(cfg,core.REPO)
+                    self.assertEqual(result['expected'],1)
+                    self.assertEqual(result['required_scenes'],[chosen[0]['map_name']])
+                    cfg.pop('selection')
+                    with self.assertRaisesRegex(ValueError,'场景脚本'):
+                        uavon.check(cfg,core.REPO)

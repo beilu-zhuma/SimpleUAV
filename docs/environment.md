@@ -2,7 +2,7 @@
 
 ## Python环境
 
-控制环境使用Python3.10–3.12，依赖`requirements/uavon-control.txt`。原生AirSim消息通过项目自带RPC边界读取，不需要安装AirSim Python SDK。模型环境单独安装，完整步骤见[中文使用说明](../README.zh-CN.md)。`requirements/model-observed.txt`提供版本参考，其中PyTorch CUDA版本须与驱动及vLLM兼容，不能直接作为通用安装命令。
+两个环境均使用Python3.12.13。控制依赖固定在`requirements/uavon-control.txt`，模型服务依赖固定在`requirements/vllm.txt`，PyTorch由vLLM解析安装。原生AirSim消息通过项目自带RPC边界读取，不需要安装AirSim Python SDK。完整版本、固定资源revision及下载命令见[中文使用说明](../README.zh-CN.md)。
 
 ```bash
 /path/to/control/python -m pip install -r requirements/uavon-control.txt
@@ -32,4 +32,6 @@ vLLM模型环境须与本机驱动、CUDA及所选模型兼容，并能找到CUD
 
 ## 本地验证
 
-`check`核验源码摘要、任务数据、场景脚本、解释器和依赖；`prepare`冻结源码、实际参数、完整身份清单与来源SHA。两者都不查询或分配GPU，不与模型/仿真服务建立导航会话。只有显式`run/resume`会分配资源。
+`check`核验源码摘要、任务数据、本次所选场景脚本、解释器和依赖；`prepare`冻结源码、实际参数、完整身份清单与来源SHA。两者都不查询或分配GPU，不与模型/仿真服务建立导航会话。只有显式`run/resume`会分配资源。
+
+修改仓库Python源码后执行`python scripts/experiment.py refresh-source`，再为新代码`check/prepare`新的输出目录。该命令不接受输出目录参数，且拒绝在已准备的运行目录及其子目录执行；旧运行继续使用原有冻结源码。

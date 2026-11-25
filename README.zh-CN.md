@@ -51,18 +51,27 @@ git clone https://github.com/beilu-zhuma/SimpleUAV.git
 cd SimpleUAV
 
 # 轻量导航与评测环境。
-conda create -n lvln-agent python=3.12 -y
+conda create -n lvln-agent python=3.12.13 -y
 conda run -n lvln-agent python -m pip install -r requirements/uavon-control.txt
 
 # 模型服务环境，由vLLM解析匹配的PyTorch依赖。
-conda create -n lvln-model python=3.12 -y
-conda run -n lvln-model python -m pip install "vllm==0.31.0" nvidia-ml-py ninja huggingface_hub
+conda create -n lvln-model python=3.12.13 -y
+conda run -n lvln-model python -m pip install -r requirements/vllm.txt
 
 export LVLN_AGENT_PYTHON="$(conda run -n lvln-agent python -c 'import sys; print(sys.executable)')"
 export LVLN_MODEL_PYTHON="$(conda run -n lvln-model python -c 'import sys; print(sys.executable)')"
 ```
 
-项目直接使用自带的 AirSim RPC 客户端，无需另装 AirSim Python SDK 或深度预测服务。原模型环境的版本记录在 [`requirements/model-observed.txt`](requirements/model-observed.txt)；其中 CUDA 专用的 PyTorch 版本是实测记录，不能当作任意机器的通用依赖锁文件。驱动/CUDA 兼容性请参考 [vLLM 安装文档](https://docs.vllm.ai/en/latest/getting_started/installation/gpu/)，参考 vLLM 版本为 [0.31.0](https://pypi.org/project/vllm/0.31.0/)。
+项目直接使用自带的 AirSim RPC 客户端，无需另装 AirSim Python SDK 或深度预测服务。依赖文件固定以下 Python 包版本：
+
+| 环境 | 版本 |
+|---|---|
+| Python | 两个环境均使用 3.12.13 |
+| 控制环境 | NumPy 1.26.4、Pillow 13.0.0、msgpack 1.2.3 |
+| 模型服务 | vLLM 0.31.0、nvidia-ml-py 13.610.43、ninja 1.13.0、huggingface-hub 1.33.0 |
+| PyTorch | 由 vLLM 解析安装，参考包版本为 2.13.0 |
+
+Linux 显卡驱动、Vulkan、`bwrap` 和需要时使用的 CUDA 编译工具属于系统依赖。请按硬件选择兼容的驱动与 wheel；Python requirements 不会安装这些系统组件。标准 wheel 不适用时参考 [vLLM 安装文档](https://docs.vllm.ai/en/latest/getting_started/installation/gpu/)。两个 Python 环境保持独立，不要手动把 vLLM 的 PyTorch 依赖替换为不兼容版本。
 
 后续命令均在仓库根目录执行。若切换到新 shell 或 tmux 会话，需重新设置 `LVLN_*` 变量或继承原 shell 环境。
 
@@ -74,6 +83,11 @@ export LVLN_MODEL_PYTHON="$(conda run -n lvln-model python -c 'import sys; print
 export LVLN_DATA_ROOT=/absolute/path/to/uavon
 export LVLN_MODEL_DIR=/absolute/path/to/models/Qwen3.6-35B-A3B-FP8
 export LVLN_RUN_DIR=/absolute/path/to/results/simpleuav-uavon
+
+# 下方下载命令使用的固定上游版本。
+export LVLN_ANNOTATIONS_REVISION=401767d69eca1643adf6690ad86160f2a09275d7
+export LVLN_SCENES_REVISION=7b20a481d36fe6c0746d4e1acbb6ca9663b40a40
+export LVLN_MODEL_REVISION=c653bba46dfa06e9658dcc0b0dc87fe4685f14a2
 ```
 
 | 资源 | 官方来源 | 本地内容 |
@@ -87,10 +101,12 @@ export LVLN_RUN_DIR=/absolute/path/to/results/simpleuav-uavon
 
 ```bash
 conda run -n lvln-model hf download Kyaren/UAV-ON-dataset \
+  --revision "$LVLN_ANNOTATIONS_REVISION" \
   --repo-type dataset --include "UAV-ON-data/valset/*" \
   --local-dir "$LVLN_DATA_ROOT/DATASET"
 
 conda run -n lvln-model hf download Kyaren/UAV-ON-envs-test \
+  --revision "$LVLN_SCENES_REVISION" \
   --repo-type dataset --include "*.zip" \
   --exclude "CityPark.zip" "BrushifyRoad.zip" "Slum.zip" "DownTown.zip" \
   --local-dir "$LVLN_DATA_ROOT/scene-archives"
@@ -101,10 +117,11 @@ for archive in "$LVLN_DATA_ROOT"/scene-archives/*.zip; do
 done
 
 conda run -n lvln-model hf download Qwen/Qwen3.6-35B-A3B-FP8 \
+  --revision "$LVLN_MODEL_REVISION" \
   --local-dir "$LVLN_MODEL_DIR"
 ```
 
-启动入口使用离线模式读取本地模型，开始评测前应完成整个 checkpoint 的下载。下载与解压需要较大磁盘空间，详细实验记录可按需开启。
+启动入口使用离线模式读取本地模型，开始评测前应完成整个 checkpoint 的下载。命令固定上游 revision，避免资源内容随更新而悄悄变化。新下载使用新的模型目录；复现已准备的运行时，保留原有 checkpoint，不覆盖其文件。下载与解压需要较大磁盘空间，详细记录可按需开启。
 
 </details>
 
@@ -165,7 +182,13 @@ PY
 
 `check` 校验文件、源码摘要、任务标注与 Python 依赖。`prepare` 将源码、实际参数和任务身份冻结到**事先不存在的新输出目录**。两者仅使用 CPU，不启动模型或仿真；GPU 空闲与仿真实际运行能力在 `run` 阶段检查。
 
-初次试跑可以在配置顶层增加 `"selection": {"count": 10, "seed": 20261116}`，然后使用独立输出目录执行 `prepare`。子集准备仍要求完整 valset 和全部健康场景脚本。正式 733 条评测请删除 `selection`，重新准备另一个输出目录。
+只测部分任务时，在 `prepare` 前向配置顶层增加：
+
+```json
+{"selection": {"count": 10, "seed": 20261116}}
+```
+
+这样会从健康任务池无放回抽取十条，使用相同导航方法与评分设置。请使用独立输出目录，并按需要降低 `concurrency`。完整原始 valset 仍用于构建稳定的任务池；场景包只检查本次实际抽中的场景，缺包时错误会列出所需场景。上方下载示例为完整评测准备所有健康场景包。正式 733 条评测请删除 `selection`，重新准备另一个输出目录。
 
 ### 6. 启动评测
 
@@ -283,12 +306,29 @@ SR 要求接受 STOP 且进入离线成功半径；主 OSR 使用决策终点与
 
 `stop` 请求正常停止；`resume` 校验冻结契约，保留已结算任务，并在新 attempt 中接续未完成任务，不覆盖历史 attempt。请先处理已记录的错误、等待旧进程退出，再接续。保留原准备目录及其外置数据、模型路径。
 
+## 修改源码后运行
+
+编辑 `src/` 下的 Python 文件后，在仓库根目录显式更新源码清单：
+
+```bash
+"$LVLN_AGENT_PYTHON" scripts/experiment.py refresh-source
+"$LVLN_AGENT_PYTHON" scripts/experiment.py check \
+  --config configs/experiments/uavon.local.json
+"$LVLN_AGENT_PYTHON" scripts/experiment.py prepare \
+  --config configs/experiments/uavon.local.json \
+  --output /absolute/path/to/results/simpleuav-modified
+```
+
+`refresh-source` 把修改、新增和删除的 Python 文件登记到 `src/MANIFEST.json`，只使用 CPU，不启动模型或仿真。评测前先审阅源码改动并执行相关测试。只修改 JSON 配置不需要运行此命令。新的输出目录必须尚不存在。
+
+已准备的运行保留各自冻结源码与 SHA。刷新命令会拒绝已准备的输出目录及其子目录，不能用来修复或覆盖被改动的冻结运行。接续应使用原冻结快照；修改方法后则从源码仓库准备新运行。内部 Python 模块名仍为 `lightning_vln`，保持导入兼容，公开入口为 `scripts/experiment.py`。
+
 ## 常见问题
 
 | 现象 | 排查方向 |
 |---|---|
 | 缺少 `bwrap`、命名空间被禁用或拒绝 root | 使用允许非特权 bubblewrap 隔离的普通 Linux 用户；请管理方配置系统依赖。 |
-| valset 不完整或找不到场景 | 使用原始 1.0 valset 与全部健康测试场景，检查目录嵌套及官方脚本名。 |
+| valset 不完整或找不到场景 | 使用完整原始 1.0 valset，以及所选任务需要的场景包，检查目录嵌套及官方脚本名。 |
 | 首次启动拒绝 GPU 或端口 | 选择已授权的空闲物理 GPU 和不重叠的空闲端口，入口不会接管其他任务。 |
 | vLLM 退出或显存不足 | 查看 `logs/model-<gpu>.log`；检查权重完整性、驱动/vLLM兼容性及模型和 UE 的共同显存需求，按资源调整后新建配置与输出。 |
 | CUDA 编译或 `ninja` 报错 | 检查模型环境的 `ninja` 及所需 CUDA 工具链；模型解释器目录会自动加入 `PATH`。 |
@@ -296,11 +336,12 @@ SR 要求接受 STOP 且进入离线成功半径；主 OSR 使用决策终点与
 | UE / Vulkan 启动失败 | 检查场景可执行权限、NVIDIA Vulkan、可选 `paths.vulkan_icd` 与对应 worker 日志。 |
 | SSH 断开后任务退出 | 检查服务器登录会话策略；tmux 不足时使用管理方允许的持久用户服务。 |
 | 接续时源码或配置 SHA 改变 | 使用原冻结实验；变更设置时准备新目录，不编辑冻结快照。 |
+| `check` / `prepare` 前提示方法源码版本改变 | 审阅源码改动后在仓库执行 `refresh-source`，再准备新输出目录。 |
 
 ## 代码结构
 
 ```text
-scripts/experiment.py                     # check / prepare / run / resume / stop公开入口
+scripts/experiment.py                     # 评测入口与显式源码清单更新
 scripts/portable_experiments/             # 配置、源码冻结与资源生命周期
 src/lightning_vln/core/
     vlm.py, prompts.py, context.py        # 模型请求、提示词、历史与记忆
@@ -308,7 +349,7 @@ src/lightning_vln/core/
     agent.py, simulator.py                # 短段运动执行与AirSim边界
 src/lightning_vln/adapters/uavon/         # 任务、搜索保护、碰撞与评分协议
 configs/experiments/uavon.example.json    # 起始配置
-requirements/                            # 控制依赖与模型环境记录
+requirements/                            # 固定版本的控制与模型服务依赖
 tests/                                   # CPU回归与确定性回放
 third_party/UAV-ON/                      # 上游benchmark与评分参考
 ```

@@ -506,7 +506,7 @@ def main():
     if '--motion-options' in agent_args and '--current-target-evidence' not in agent_args:
         parser.error('--motion-options 需要 --current-target-evidence')
     if any(flag in agent_args for flag in ('--initial-yaw90', '--ascent-guard')) and '--current-target-evidence' not in agent_args:
-        parser.error('小改动实验须提供 --current-target-evidence')
+        parser.error('SimpleUAV主方法需要 --current-target-evidence')
     prompt_version = METHOD_VERSION
     plan = {'dataset_sha256': hashlib.sha256(args.dataset.read_bytes()).hexdigest(), 'prompt_version': prompt_version,
             'collision_detection_protocol': COLLISION_PROTOCOL,

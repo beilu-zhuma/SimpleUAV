@@ -39,7 +39,7 @@ def validate_config(config):
         raise ValueError('UAV-ON需要显式填写1至4张已授权GPU')
     count=config.get('concurrency')
     if type(count) is not int or count<1 or count>16 or count%len(cards):
-        raise ValueError('concurrency须为1至16，且能按GPU均分；容量须另行GPU验收')
+        raise ValueError('concurrency须为1至16，且能按GPU均分；请按模型和仿真总负载设置')
     models=config.get('models', [])
     if len(models)!=1 or models[0].get('name') not in ('qwen36','qwen3vl8b','qwen3vl4b','qwen35_9b','qwen35_4b'):
         raise ValueError('一次UAV-ON配置只运行一个受支持的Qwen模型')
@@ -65,12 +65,10 @@ def build_inputs(config, repo):
     # 所有基准共用src，只有此处读取UAV-ON任务。
     import sys
     sys.path.insert(0,str(repo/'src'))
-    from lightning_vln.benchmark import build_full_testset, TEST_SCENES
+    from lightning_vln.benchmark import build_full_testset
     tasks,manifest=build_full_testset(Path(config['paths']['annotations']))
     if manifest['source_total']!=1000 or len(tasks)!=733:
         raise ValueError('官方1.0 valset应为1000条，排除4个问题场景后733条；拒绝替换任务集')
-    for scene in manifest['selected_by_scene']:
-        require(Path(config['paths']['scenes'])/TEST_SCENES[scene],'UAV-ON test场景脚本')
     return tasks,manifest
 
 
@@ -87,6 +85,11 @@ def check(config, repo):
     tasks,manifest=build_inputs(config,repo)
     from .selection import select
     chosen,proof=select(tasks,config,identity='episode_id')
+    from lightning_vln.benchmark import TEST_SCENES
+    required_scenes=sorted({task['map_name'] for task in chosen})
+    for scene in required_scenes:
+        require(Path(config['paths']['scenes'])/TEST_SCENES[scene],
+                '本次任务需要的UAV-ON场景脚本（'+', '.join(required_scenes)+'）')
     inputs={str(Path(config['paths']['annotations'])/name):sha
             for name,sha in manifest['source_files_sha256'].items()}
     code=('import json,importlib.util as u; '
@@ -98,7 +101,7 @@ def check(config, repo):
         missing=[name for name,found in json.loads(result.stdout).items() if not found]
         if missing:raise ValueError(role+'缺少模块：'+','.join(missing))
     return dict(passed=True,benchmark='uavon',expected=len(chosen),excluded=len(manifest['excluded_ids']),
-                method=method_config(config),
+                method=method_config(config),required_scenes=required_scenes,
                 inputs=inputs,gpu_checked=False,gpu_started=False)
 
 

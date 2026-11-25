@@ -1,4 +1,4 @@
-"""从完整健康test集固定随机抽样；不替换原random50/37身份。"""
+"""健康test集的固定种子抽样与任务身份校验。"""
 
 import hashlib
 import json

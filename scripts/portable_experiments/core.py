@@ -35,12 +35,51 @@ def clone(source, target):
     shutil.copytree(source, target, ignore=shutil.ignore_patterns('__pycache__', '*.pyc', '*.log', '.git'))
 
 
+def source_digests(root):
+    root = Path(root).resolve()
+    result = {}
+    for path in sorted(root.rglob('*.py')):
+        if '__pycache__' in path.parts:
+            continue
+        if path.is_symlink():
+            raise ValueError('源码文件不能使用符号链接：'+str(path))
+        if path.is_file():
+            result[str(path.relative_to(root))] = digest(path)
+    return result
+
+
 def verify_bundle(root):
     manifest = read(Path(root)/'MANIFEST.json')
-    for name, sha in manifest['files'].items():
-        if digest(Path(root)/name) != sha:
-            raise ValueError('方法源码版本改变：'+name)
+    if manifest.get('schema') != 1 or not isinstance(manifest.get('files'), dict):
+        raise ValueError('不支持的源码清单格式')
+    actual = source_digests(root)
+    if not actual or actual != manifest['files']:
+        raise ValueError('方法源码版本改变：请在源码仓库执行 '
+                         'python scripts/experiment.py refresh-source，'
+                         '再prepare新的输出目录；不要修改已冻结的运行目录')
     return manifest
+
+
+def refresh_source_manifest(repo=REPO):
+    """显式登记开发后的源码，不修改任何已准备的运行快照。"""
+    repo = Path(repo).resolve()
+    if any((parent/'portable-contract.json').exists() for parent in (repo, *repo.parents)):
+        raise ValueError('禁止在冻结输出目录或其子目录更新源码清单；请回到源码仓库')
+    source = repo/'src'
+    if source.is_symlink():
+        raise ValueError('src目录不能使用符号链接')
+    require(source, 'src目录', directory=True)
+    path = source/'MANIFEST.json'
+    if path.is_symlink():
+        raise ValueError('源码清单不能使用符号链接')
+    manifest = read(path)
+    if manifest.get('schema') != 1:
+        raise ValueError('不支持的源码清单格式')
+    manifest['files'] = source_digests(source)
+    if not manifest['files']:
+        raise ValueError('src目录没有Python源码，拒绝写入空清单')
+    save(path, manifest)
+    return dict(updated=str(path), files=len(manifest['files']), gpu_started=False)
 
 
 def require(path, label, directory=False):
@@ -66,7 +105,7 @@ def verify_output(root):
 def load_config(path):
     config = read(path)
     if config.get('schema') != SCHEMA or config.get('benchmark') != 'uavon':
-        raise ValueError('uavon-only分支只接受schema=1、benchmark=uavon')
+        raise ValueError('SimpleUAV只接受schema=1、benchmark=uavon')
     config = json.loads(json.dumps(config))
     base = Path(path).resolve().parent
     for key, value in config['paths'].items():
@@ -82,6 +121,6 @@ def load_config(path):
 
 def check(config, repo=REPO):
     if config.get('benchmark') != 'uavon':
-        raise ValueError('uavon-only分支只接受UAV-ON')
+        raise ValueError('SimpleUAV只接受UAV-ON')
     from .uavon import check as check_uavon
     return check_uavon(config, repo)

@@ -62,7 +62,7 @@ class SharedCoreTests(unittest.TestCase):
         values=dict(system=prompts.SYSTEM_PROMPT,localize=prompts.LOCALIZATION_PROMPT,
                     evidence=prompts.EVIDENCE_NAVIGATION_PROMPT,motion=prompts.MOTION_NAVIGATION_PROMPT,
                     guard=GUARD_PROMPT)
-        expected=json.loads((REPO/'tests/fixtures/shared-core-origin.json').read_text())['prompt_sha256']
+        expected=json.loads((REPO/'tests/fixtures/prompt-hashes.json').read_text())['prompt_sha256']
         self.assertEqual({k:hashlib.sha256(v.encode()).hexdigest() for k,v in values.items()},expected)
 
 

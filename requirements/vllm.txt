@@ -1,0 +1,5 @@
+# 独立模型服务环境；PyTorch及CUDA依赖由vLLM解析。
+vllm==0.31.0
+nvidia-ml-py==13.610.43
+ninja==1.13.0
+huggingface-hub==1.33.0

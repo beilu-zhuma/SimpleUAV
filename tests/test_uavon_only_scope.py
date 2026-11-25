@@ -25,11 +25,8 @@ class UavonOnlyScopeTests(unittest.TestCase):
                 with self.subTest(benchmark=name),self.assertRaisesRegex(ValueError,'uavon'):
                     core.load_config(path)
 
-    def test_retained_navigation_and_official_reference_match_version1(self):
-        receipt=core.read(core.REPO/'docs/source-provenance.json')
-        self.assertEqual(receipt['base_commit'],'567d37889f69814f9e6c6e9c177f02c7b6dc3baf')
-        for name,sha in receipt['unchanged_files_sha256'].items():
-            self.assertEqual(core.digest(core.REPO/name),sha,name)
+    def test_source_manifest_and_uavon_package_scope(self):
+        core.verify_bundle(core.REPO/'src')
         self.assertFalse((core.REPO/'methods').exists())
         self.assertFalse((core.REPO/'variants').exists())
         self.assertEqual({p.name for p in (core.REPO/'src/lightning_vln/adapters').iterdir() if p.is_dir()},{'uavon'})

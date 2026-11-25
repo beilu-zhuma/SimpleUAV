@@ -1,4 +1,0 @@
-# 当前模型环境实查值。PyTorch CUDA wheel需使用对应官方分发源；不是通用锁文件。
-vllm==0.31.0
-torch==2.13.0+cu130
-nvidia-ml-py==13.610.43

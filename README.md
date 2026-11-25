@@ -51,18 +51,27 @@ git clone https://github.com/beilu-zhuma/SimpleUAV.git
 cd SimpleUAV
 
 # Lightweight navigation / evaluation environment.
-conda create -n lvln-agent python=3.12 -y
+conda create -n lvln-agent python=3.12.13 -y
 conda run -n lvln-agent python -m pip install -r requirements/uavon-control.txt
 
 # Model-serving environment. Let vLLM resolve its compatible PyTorch dependencies.
-conda create -n lvln-model python=3.12 -y
-conda run -n lvln-model python -m pip install "vllm==0.31.0" nvidia-ml-py ninja huggingface_hub
+conda create -n lvln-model python=3.12.13 -y
+conda run -n lvln-model python -m pip install -r requirements/vllm.txt
 
 export LVLN_AGENT_PYTHON="$(conda run -n lvln-agent python -c 'import sys; print(sys.executable)')"
 export LVLN_MODEL_PYTHON="$(conda run -n lvln-model python -c 'import sys; print(sys.executable)')"
 ```
 
-The agent uses the repository's native AirSim RPC client; an additional AirSim Python SDK or depth-prediction service is not required. [`requirements/model-observed.txt`](requirements/model-observed.txt) records the source model environment. Its CUDA-specific PyTorch version is an environment record, not a portable requirements lockfile. For driver/CUDA compatibility, follow the [vLLM installation guide](https://docs.vllm.ai/en/latest/getting_started/installation/gpu/); the reference vLLM release is [0.31.0](https://pypi.org/project/vllm/0.31.0/).
+The agent uses the repository's native AirSim RPC client; an additional AirSim Python SDK or depth-prediction service is not required. The dependency files pin the following Python packages:
+
+| Environment | Versions |
+|---|---|
+| Python | 3.12.13 for both environments |
+| Control | NumPy 1.26.4, Pillow 13.0.0, msgpack 1.2.3 |
+| Model serving | vLLM 0.31.0, nvidia-ml-py 13.610.43, ninja 1.13.0, huggingface-hub 1.33.0 |
+| PyTorch | Resolved by vLLM; the reference package version is 2.13.0 |
+
+Linux GPU drivers, Vulkan, `bwrap`, and any CUDA compilation tools are system prerequisites. Choose wheels and a driver compatible with your hardware; the Python requirements do not install these system components. Follow the [vLLM installation guide](https://docs.vllm.ai/en/latest/getting_started/installation/gpu/) if the standard wheel is unsuitable. Keep the two environments separate, and do not manually replace vLLM's PyTorch dependency with an incompatible build.
 
 Run subsequent commands from the repository root. In a new shell or tmux session, re-export the `LVLN_*` variables or use the same shell environment.
 
@@ -74,6 +83,11 @@ Choose storage locations you own. Replace these example paths before running:
 export LVLN_DATA_ROOT=/absolute/path/to/uavon
 export LVLN_MODEL_DIR=/absolute/path/to/models/Qwen3.6-35B-A3B-FP8
 export LVLN_RUN_DIR=/absolute/path/to/results/simpleuav-uavon
+
+# Fixed upstream snapshots for the download commands below.
+export LVLN_ANNOTATIONS_REVISION=401767d69eca1643adf6690ad86160f2a09275d7
+export LVLN_SCENES_REVISION=7b20a481d36fe6c0746d4e1acbb6ca9663b40a40
+export LVLN_MODEL_REVISION=c653bba46dfa06e9658dcc0b0dc87fe4685f14a2
 ```
 
 | Asset | Official source | Required local content |
@@ -87,10 +101,12 @@ export LVLN_RUN_DIR=/absolute/path/to/results/simpleuav-uavon
 
 ```bash
 conda run -n lvln-model hf download Kyaren/UAV-ON-dataset \
+  --revision "$LVLN_ANNOTATIONS_REVISION" \
   --repo-type dataset --include "UAV-ON-data/valset/*" \
   --local-dir "$LVLN_DATA_ROOT/DATASET"
 
 conda run -n lvln-model hf download Kyaren/UAV-ON-envs-test \
+  --revision "$LVLN_SCENES_REVISION" \
   --repo-type dataset --include "*.zip" \
   --exclude "CityPark.zip" "BrushifyRoad.zip" "Slum.zip" "DownTown.zip" \
   --local-dir "$LVLN_DATA_ROOT/scene-archives"
@@ -101,10 +117,11 @@ for archive in "$LVLN_DATA_ROOT"/scene-archives/*.zip; do
 done
 
 conda run -n lvln-model hf download Qwen/Qwen3.6-35B-A3B-FP8 \
+  --revision "$LVLN_MODEL_REVISION" \
   --local-dir "$LVLN_MODEL_DIR"
 ```
 
-The launch path uses local model files in offline mode. Finish downloading the complete checkpoint before starting evaluation. Downloads and extraction can consume substantial disk space; detailed recording is optional.
+The launch path uses local model files in offline mode. Finish downloading the complete checkpoint before starting evaluation. The commands pin upstream revisions to avoid silently changing the inputs. Use a fresh model directory for a new download; keep an existing checkpoint intact when reproducing a prepared run. Downloads and extraction can consume substantial disk space; detailed recording is optional.
 
 </details>
 
@@ -165,7 +182,13 @@ Review the generated JSON, including GPU indices, model path, and ports. Configu
 
 `check` validates files, source checksums, annotations, and Python dependencies. `prepare` freezes code, effective parameters, and task identities in a **new output directory that must not already exist**. Both commands run on CPU and do not start model or simulator services. GPU availability and real simulator operation are checked during `run`.
 
-For an initial smoke test, add `"selection": {"count": 10, "seed": 20261116}` to the top-level config **before preparing**, and use a separate output directory. Subset preparation still requires the complete valset and all healthy scene scripts. Remove `selection` and prepare another output directory for the full 733-task evaluation.
+To evaluate only part of the task set, add the following to the top-level config **before preparing**:
+
+```json
+{"selection": {"count": 10, "seed": 20261116}}
+```
+
+This runs ten tasks sampled without replacement from the healthy pool, with the same navigation and scoring settings. Use a separate output directory and a lower `concurrency` if fewer workers are needed. The complete original valset is still required to construct a stable task pool; only scene packages actually selected for this run are checked. If a package is missing, the error lists the required scenes. The download example above supplies all healthy packages for a full evaluation. Remove `selection` and prepare another output directory to evaluate all 733 tasks.
 
 ### 6. Run the evaluation
 
@@ -283,12 +306,29 @@ Report results as **UAV-ON 1.0 adjusted protocol**. The filtered task set, spawn
 
 `stop` requests a graceful shutdown. `resume` checks the frozen contract, retains settled task results, and retries unfinished tasks in a new attempt without overwriting prior attempts. Resolve the recorded error and wait for old run processes to exit before resuming. Keep the prepared directory and its external data/model paths in place.
 
+## Modifying source code
+
+After editing Python files in `src/`, explicitly refresh the source manifest from the repository root:
+
+```bash
+"$LVLN_AGENT_PYTHON" scripts/experiment.py refresh-source
+"$LVLN_AGENT_PYTHON" scripts/experiment.py check \
+  --config configs/experiments/uavon.local.json
+"$LVLN_AGENT_PYTHON" scripts/experiment.py prepare \
+  --config configs/experiments/uavon.local.json \
+  --output /absolute/path/to/results/simpleuav-modified
+```
+
+`refresh-source` registers changed, added, and removed Python files in `src/MANIFEST.json`; it runs on CPU without a model or simulator. Review your changes and run the relevant tests before evaluation. Updating only the JSON configuration does not require this command. A new output directory must not already exist.
+
+Prepared runs retain their own frozen source and checksums. The refresh command rejects prepared output directories and their descendants; it cannot repair or overwrite an altered frozen run. Resume a run using its original snapshot, or prepare a new run from the edited repository. The internal Python namespace remains `lightning_vln` for import compatibility; the public entry point is `scripts/experiment.py`.
+
 ## Troubleshooting
 
 | Symptom | What to check |
 |---|---|
 | `bwrap` missing, namespace denied, or root-user rejection | Use a regular Linux user with working unprivileged bubblewrap isolation; ask your administrator to provision the system dependency. |
-| Unknown / incomplete valset or scene not found | Supply the original 1.0 valset and all healthy test scene packages. Check directory nesting and official script names. |
+| Unknown / incomplete valset or scene not found | Supply the complete original 1.0 valset and scene packages needed by the selected tasks. Check directory nesting and official script names. |
 | First run refuses a GPU or port | Select an idle, authorized physical GPU and non-overlapping free ports; the launcher will not take over existing tasks. |
 | vLLM exits or runs out of memory | Read `logs/model-<gpu>.log`. Check the complete checkpoint, driver/vLLM compatibility, and shared model/UE memory budget; prepare a fresh configuration with appropriate resources. |
 | CUDA build / `ninja` error | Check the model environment's `ninja` and compatible CUDA toolchain; its interpreter directory is added to `PATH` automatically. |
@@ -296,11 +336,12 @@ Report results as **UAV-ON 1.0 adjusted protocol**. The filtered task set, spawn
 | UE / Vulkan startup failure | Check scene executable permissions, NVIDIA Vulkan support, optional `paths.vulkan_icd`, and the attempt's worker logs. |
 | Connection closed after SSH logout | Check the server's login-session policy. Use an allowed persistent user service if tmux alone is insufficient. |
 | Source/config checksum changed on resume | Use the original frozen experiment. Prepare a new directory for modified settings rather than editing the frozen snapshot. |
+| Method source version changed before `check` / `prepare` | After reviewing source edits, run `refresh-source` in the repository and prepare a new output directory. |
 
 ## Code map
 
 ```text
-scripts/experiment.py                     # public check / prepare / run / resume / stop CLI
+scripts/experiment.py                     # evaluation CLI and explicit source-manifest refresh
 scripts/portable_experiments/             # configuration, snapshots, resource lifecycle
 src/lightning_vln/core/
     vlm.py, prompts.py, context.py        # model requests, prompts, history and memory
@@ -308,7 +349,7 @@ src/lightning_vln/core/
     agent.py, simulator.py                # short-segment execution and AirSim boundary
 src/lightning_vln/adapters/uavon/         # UAV-ON tasks, search guards, collision/scoring protocol
 configs/experiments/uavon.example.json    # starting configuration
-requirements/                            # control dependencies and model environment record
+requirements/                            # pinned control and model-serving dependencies
 tests/                                   # CPU regression and deterministic replay
 third_party/UAV-ON/                      # upstream benchmark/scoring reference
 ```

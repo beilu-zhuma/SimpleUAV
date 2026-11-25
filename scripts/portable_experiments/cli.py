@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
-from .core import load_config, check, read, verify_output
+from .core import load_config, check, read, verify_output, refresh_source_manifest
 
 
 def request_stop(root):
@@ -22,11 +22,16 @@ def request_stop(root):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=('check','prepare','run','resume','stop'))
+    parser.add_argument('action', choices=('check','prepare','run','resume','stop','refresh-source'))
     parser.add_argument('--config', type=Path)
     parser.add_argument('--output', type=Path)
     args = parser.parse_args()
     try:
+        if args.action == 'refresh-source':
+            if args.config is not None or args.output is not None:
+                parser.error('refresh-source只更新当前源码仓库，不接受--config或--output')
+            print(json.dumps(refresh_source_manifest(), ensure_ascii=False, indent=2))
+            return
         if args.action in ('check','prepare'):
             if args.config is None:
                 parser.error('check/prepare需要--config')
@@ -55,7 +60,7 @@ def main():
         from .runtime import run
         run(root,resume=args.action=='resume')
     except (OSError,ValueError,KeyError,subprocess.SubprocessError) as error:
-        print('UAV-ON入口拒绝继续：'+str(error),file=sys.stderr)
+        print('SimpleUAV入口拒绝继续：'+str(error),file=sys.stderr)
         raise SystemExit(2)
 
 
