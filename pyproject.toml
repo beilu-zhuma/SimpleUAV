@@ -3,9 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "lightning-vln"
+name = "simpleuav"
 version = "0.1.0"
-description = "LightningVLN standalone UAV-ON evaluation."
+description = "SimpleUAV standalone UAV-ON evaluation."
 license = {file = "LICENSE"}
 requires-python = ">=3.10,<3.13"
 dependencies = [

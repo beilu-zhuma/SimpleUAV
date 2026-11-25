@@ -1,4 +1,4 @@
-<h1 align="center">LightningVLN</h1>
+<h1 align="center">SimpleUAV</h1>
 
 <p align="center"><strong>Training-free visual search for aerial object-goal navigation.</strong></p>
 
@@ -18,7 +18,7 @@
 
 ## Overview
 
-LightningVLN turns a pretrained vision-language model into a closed-loop aerial search agent. Given a language goal and four RGB-D views, it identifies current target candidates, grounds them in metric geometry, and chooses short navigation actions. Each decision uses the actual outcome of the previous motion, selected history frames, and a compact text memory. The VLM receives RGB images; metric depth is used by geometric grounding and control.
+SimpleUAV turns a pretrained vision-language model into a closed-loop aerial search agent. Given a language goal and four RGB-D views, it identifies current target candidates, grounds them in metric geometry, and chooses short navigation actions. Each decision uses the actual outcome of the previous motion, selected history frames, and a compact text memory. The VLM receives RGB images; metric depth is used by geometric grounding and control.
 
 - **Two-stage visual reasoning.** The same VLM first localizes candidates, then selects navigation behavior using current evidence and context. Target actions are bound to candidates from the current observation.
 - **Grounded execution.** Depth and camera poses translate image regions into motion goals. The controller checks the local motion corridor during execution and reports where and why movement stopped.
@@ -47,8 +47,8 @@ The reference setup uses an **RTX PRO 6000 Blackwell 96GB** with four simulator 
 ### 2. Clone the repository and install the Python dependencies
 
 ```bash
-git clone --branch uavon-only --single-branch https://github.com/CURRENTF/LightningVLN.git
-cd LightningVLN
+git clone https://github.com/beilu-zhuma/SimpleUAV.git
+cd SimpleUAV
 
 # Lightweight navigation / evaluation environment.
 conda create -n lvln-agent python=3.12 -y
@@ -73,7 +73,7 @@ Choose storage locations you own. Replace these example paths before running:
 ```bash
 export LVLN_DATA_ROOT=/absolute/path/to/uavon
 export LVLN_MODEL_DIR=/absolute/path/to/models/Qwen3.6-35B-A3B-FP8
-export LVLN_RUN_DIR=/absolute/path/to/results/lightning-vln-uavon
+export LVLN_RUN_DIR=/absolute/path/to/results/simpleuav-uavon
 ```
 
 | Asset | Official source | Required local content |
@@ -171,12 +171,12 @@ For an initial smoke test, add `"selection": {"count": 10, "seed": 20261116}` to
 
 ```bash
 # Pass the required variables explicitly, including when a tmux server already exists.
-tmux new-session -s lightning-vln -c "$PWD" \
+tmux new-session -s simpleuav -c "$PWD" \
   -e "LVLN_AGENT_PYTHON=$LVLN_AGENT_PYTHON" \
   -e "LVLN_RUN_DIR=$LVLN_RUN_DIR"
 
 "$LVLN_AGENT_PYTHON" scripts/experiment.py run --output "$LVLN_RUN_DIR"
-# Detach with Ctrl-B, then D. Reattach with: tmux attach -t lightning-vln
+# Detach with Ctrl-B, then D. Reattach with: tmux attach -t simpleuav
 ```
 
 If tmux is unavailable, execute the `run` command directly in your terminal. The [tmux manual](https://man.openbsd.org/tmux#new-session) documents the session options above.
@@ -324,4 +324,4 @@ CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:scripts:tests \
 
 We thank [UAV-ON](https://github.com/Kyaren/UAV_ON), [Qwen](https://huggingface.co/Qwen), and [vLLM](https://github.com/vllm-project/vllm) for their benchmark, models, and inference infrastructure. Upstream scoring references and attribution are retained in `third_party/UAV-ON/`.
 
-Original LightningVLN code is licensed under the [MIT License](LICENSE). Third-party sources and attribution are listed in [third-party notices](docs/third-party.md). Model weights, datasets, and scene packages are distributed separately under their respective terms.
+Original SimpleUAV code is licensed under the [MIT License](LICENSE). Third-party sources and attribution are listed in [third-party notices](docs/third-party.md). Model weights, datasets, and scene packages are distributed separately under their respective terms.

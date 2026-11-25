@@ -1,4 +1,4 @@
-<h1 align="center">LightningVLN</h1>
+<h1 align="center">SimpleUAV</h1>
 
 <p align="center"><strong>无需任务专用训练的无人机视觉目标搜索与导航。</strong></p>
 
@@ -18,7 +18,7 @@
 
 ## 方法概览
 
-LightningVLN 利用预训练视觉语言模型实现闭环无人机搜索。输入语言目标与四路 RGB-D 观测，系统先识别当前目标候选，再结合米制深度定位，选择短段导航动作。后续决策结合上一次运动的真实结果、有限历史关键帧与简短文字记忆。RGB 图像进入 VLM，米制深度由几何定位和控制层使用。
+SimpleUAV 利用预训练视觉语言模型实现闭环无人机搜索。输入语言目标与四路 RGB-D 观测，系统先识别当前目标候选，再结合米制深度定位，选择短段导航动作。后续决策结合上一次运动的真实结果、有限历史关键帧与简短文字记忆。RGB 图像进入 VLM，米制深度由几何定位和控制层使用。
 
 - **两阶段视觉推理。** 同一个 VLM 先定位候选，再结合当前证据与上下文选择导航行为。接近与停止动作绑定当前观测中的候选。
 - **几何约束的执行。** 深度与相机位姿将图像区域转换为运动目标。控制器在执行中检查局部通道，反馈实际停在哪里、为什么停下。
@@ -47,8 +47,8 @@ LightningVLN 利用预训练视觉语言模型实现闭环无人机搜索。输�
 ### 2. 获取代码并安装 Python 依赖
 
 ```bash
-git clone --branch uavon-only --single-branch https://github.com/CURRENTF/LightningVLN.git
-cd LightningVLN
+git clone https://github.com/beilu-zhuma/SimpleUAV.git
+cd SimpleUAV
 
 # 轻量导航与评测环境。
 conda create -n lvln-agent python=3.12 -y
@@ -73,7 +73,7 @@ export LVLN_MODEL_PYTHON="$(conda run -n lvln-model python -c 'import sys; print
 ```bash
 export LVLN_DATA_ROOT=/absolute/path/to/uavon
 export LVLN_MODEL_DIR=/absolute/path/to/models/Qwen3.6-35B-A3B-FP8
-export LVLN_RUN_DIR=/absolute/path/to/results/lightning-vln-uavon
+export LVLN_RUN_DIR=/absolute/path/to/results/simpleuav-uavon
 ```
 
 | 资源 | 官方来源 | 本地内容 |
@@ -171,12 +171,12 @@ PY
 
 ```bash
 # 显式传入所需变量，兼容已有tmux server的情况。
-tmux new-session -s lightning-vln -c "$PWD" \
+tmux new-session -s simpleuav -c "$PWD" \
   -e "LVLN_AGENT_PYTHON=$LVLN_AGENT_PYTHON" \
   -e "LVLN_RUN_DIR=$LVLN_RUN_DIR"
 
 "$LVLN_AGENT_PYTHON" scripts/experiment.py run --output "$LVLN_RUN_DIR"
-# Ctrl-B、D脱离；重新连接：tmux attach -t lightning-vln
+# Ctrl-B、D脱离；重新连接：tmux attach -t simpleuav
 ```
 
 若没有 tmux，可直接在终端执行上述 `run` 命令。会话参数见 [tmux 手册](https://man.openbsd.org/tmux#new-session)。
@@ -324,4 +324,4 @@ CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:scripts:tests \
 
 感谢 [UAV-ON](https://github.com/Kyaren/UAV_ON)、[Qwen](https://huggingface.co/Qwen) 与 [vLLM](https://github.com/vllm-project/vllm) 提供 benchmark、模型与推理基础设施。上游评分参考与署名保留在 `third_party/UAV-ON/`。
 
-LightningVLN 原创代码采用 [MIT 许可证](LICENSE)。第三方代码的来源和署名见[第三方说明](docs/third-party.md)。模型权重、数据集与场景包独立分发，遵循各自使用条款。
+SimpleUAV 原创代码采用 [MIT 许可证](LICENSE)。第三方代码的来源和署名见[第三方说明](docs/third-party.md)。模型权重、数据集与场景包独立分发，遵循各自使用条款。
