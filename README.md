@@ -190,6 +190,29 @@ To evaluate only part of the task set, add the following to the top-level config
 
 This runs ten tasks sampled without replacement from the healthy pool, with the same navigation and scoring settings. Use a separate output directory and a lower `concurrency` if fewer workers are needed. The complete original valset is still required to construct a stable task pool; only scene packages actually selected for this run are checked. If a package is missing, the error lists the required scenes. The download example above supplies all healthy packages for a full evaluation. Remove `selection` and prepare another output directory to evaluate all 733 tasks.
 
+For a copyable ten-task setup, use the commands below instead of the full-set preparation above. They preserve your existing local config and create a separate subset config. The subset config and output directory must not already exist; choose new names if they do.
+
+```bash
+"$LVLN_AGENT_PYTHON" - <<'PY'
+import json
+from pathlib import Path
+
+source = Path("configs/experiments/uavon.local.json")
+config = json.loads(source.read_text())
+config["selection"] = {"count": 10, "seed": 20261116}
+with source.with_name("uavon.subset.local.json").open("x") as handle:
+    json.dump(config, handle, indent=2)
+    handle.write("\n")
+PY
+
+export LVLN_RUN_DIR=/absolute/path/to/results/simpleuav-subset10
+"$LVLN_AGENT_PYTHON" scripts/experiment.py prepare \
+  --config configs/experiments/uavon.subset.local.json \
+  --output "$LVLN_RUN_DIR"
+```
+
+Then continue with step 6 below. To restore full-set evaluation, select the original `uavon.local.json` and a new output directory.
+
 ### 6. Run the evaluation
 
 ```bash

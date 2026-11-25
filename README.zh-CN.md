@@ -190,6 +190,29 @@ PY
 
 这样会从健康任务池无放回抽取十条，使用相同导航方法与评分设置。请使用独立输出目录，并按需要降低 `concurrency`。完整原始 valset 仍用于构建稳定的任务池；场景包只检查本次实际抽中的场景，缺包时错误会列出所需场景。上方下载示例为完整评测准备所有健康场景包。正式 733 条评测请删除 `selection`，重新准备另一个输出目录。
 
+需要可直接复制的十条任务配置时，用下面命令替代上方的全量准备命令。它保留已有本机配置，另外创建子集配置。子集配置和输出目录都必须尚不存在；若已存在，请换用新名称。
+
+```bash
+"$LVLN_AGENT_PYTHON" - <<'PY'
+import json
+from pathlib import Path
+
+source = Path("configs/experiments/uavon.local.json")
+config = json.loads(source.read_text())
+config["selection"] = {"count": 10, "seed": 20261116}
+with source.with_name("uavon.subset.local.json").open("x") as handle:
+    json.dump(config, handle, indent=2)
+    handle.write("\n")
+PY
+
+export LVLN_RUN_DIR=/absolute/path/to/results/simpleuav-subset10
+"$LVLN_AGENT_PYTHON" scripts/experiment.py prepare \
+  --config configs/experiments/uavon.subset.local.json \
+  --output "$LVLN_RUN_DIR"
+```
+
+随后按下方第6步启动即可。恢复全量评测时，使用原来的 `uavon.local.json` 和新的输出目录。
+
 ### 6. 启动评测
 
 ```bash
