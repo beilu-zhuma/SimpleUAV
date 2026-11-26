@@ -11,7 +11,7 @@
 
 <p align="center">
   <strong>English</strong> · <a href="README.zh-CN.md">简体中文</a><br>
-  <a href="#overview">Overview</a> · <a href="#quickstart">Quickstart</a> · <a href="#configuration">Configuration</a> · <a href="#results-and-evaluation">Results</a> · <a href="#troubleshooting">Troubleshooting</a>
+  <a href="https://arxiv.org/abs/2611.34115"><strong>Paper (arXiv)</strong></a> · <a href="#overview">Overview</a> · <a href="#quickstart">Quickstart</a> · <a href="#configuration">Configuration</a> · <a href="#results-and-evaluation">Results</a> · <a href="#troubleshooting">Troubleshooting</a> · <a href="#citation">Citation</a>
 </p>
 
 <p align="center"><a href="docs/assets/method.pdf"><img src="docs/assets/method.png" width="100%" alt="SimpleUAV method overview: select, fly straight, check and halt, with execution feedback."></a></p>
@@ -25,7 +25,7 @@ SimpleUAV turns a pretrained vision-language model into a closed-loop aerial sea
 - **Bounded search context.** Four rounds of selected-view history and a model-written text summary retain observations and unfinished search intentions. An ascent guard limits repeated upward exploration at the same horizontal location.
 - **Reproducible evaluation.** One entry point checks inputs, freezes code and configuration, runs isolated simulators, and resumes unfinished tasks. SR, OSR, SPL, and NE are retained even when RGB-D recording is disabled.
 
-This branch contains the **UAV-ON implementation**. It runs a pretrained model without task-specific fine-tuning. Evaluation uses **UAV-ON 1.0 adjusted protocol**; the exact settings and differences from the original benchmark are listed [below](#results-and-evaluation).
+This repository contains the **UAV-ON implementation** of [*A Simple Yet Effective Agent for Open-World Aerial Object Search*](https://arxiv.org/abs/2611.34115). It runs a pretrained model without task-specific fine-tuning. Evaluation uses **UAV-ON 1.0 adjusted protocol**; the exact settings and differences from the original benchmark are listed [below](#results-and-evaluation).
 
 ## Quickstart
 
@@ -392,6 +392,23 @@ The fixed release is tagged `v0.1.0`. To use it from a clean checkout:
 
 ```bash
 git checkout v0.1.0
+```
+
+## Citation
+
+If you use SimpleUAV in your research, please cite our arXiv preprint:
+
+```bibtex
+@misc{hao2026simpleuav,
+  author        = {Hao, Jitai and Yang, Liangxing and Li, Zhenyang and
+                   Liu, Fan and Huang, Qiang and Yu, Jun},
+  title         = {A Simple Yet Effective Agent for Open-World Aerial Object Search},
+  year          = {2026},
+  eprint        = {2611.34115},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  url           = {https://arxiv.org/abs/2611.34115}
+}
 ```
 
 ## Acknowledgments and licensing

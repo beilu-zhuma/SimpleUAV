@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="README.md">English</a> · <strong>简体中文</strong><br>
-  <a href="#方法概览">方法概览</a> · <a href="#快速开始">快速开始</a> · <a href="#配置说明">配置说明</a> · <a href="#结果与评测协议">实验结果</a> · <a href="#常见问题">常见问题</a>
+  <a href="https://arxiv.org/abs/2611.34115"><strong>论文（arXiv）</strong></a> · <a href="#方法概览">方法概览</a> · <a href="#快速开始">快速开始</a> · <a href="#配置说明">配置说明</a> · <a href="#结果与评测协议">实验结果</a> · <a href="#常见问题">常见问题</a> · <a href="#引用">引用</a>
 </p>
 
 <p align="center"><a href="docs/assets/method.pdf"><img src="docs/assets/method.png" width="100%" alt="SimpleUAV 方法概览：选择目标、直线飞行、检查与停止，并结合执行反馈形成闭环。"></a></p>
@@ -25,7 +25,7 @@ SimpleUAV 利用预训练视觉语言模型实现闭环无人机搜索。输入�
 - **有界搜索上下文。** 最近四轮的所选视图与模型维护的文字摘要保留观察和未完成意图；上升保护限制同一水平位置的重复上升探索。
 - **可复现评测。** 统一入口检查输入、冻结源码与配置、启动隔离仿真，并接续未完成任务。关闭 RGB-D 留档仍保留 SR、OSR、SPL、NE。
 
-本分支提供 **UAV-ON 实现**，无需对预训练模型进行任务专用微调。评测采用 **UAV-ON 1.0 adjusted protocol**，具体参数及相对官方实现的差异见[评测协议](#结果与评测协议)。
+本仓库提供论文 [*A Simple Yet Effective Agent for Open-World Aerial Object Search*](https://arxiv.org/abs/2611.34115) 的 **UAV-ON 实现**，无需对预训练模型进行任务专用微调。评测采用 **UAV-ON 1.0 adjusted protocol**，具体参数及相对官方实现的差异见[评测协议](#结果与评测协议)。
 
 ## 快速开始
 
@@ -392,6 +392,23 @@ CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:scripts:tests \
 
 ```bash
 git checkout v0.1.0
+```
+
+## 引用
+
+如果在研究中使用了 SimpleUAV，请引用我们的 arXiv 预印本：
+
+```bibtex
+@misc{hao2026simpleuav,
+  author        = {Hao, Jitai and Yang, Liangxing and Li, Zhenyang and
+                   Liu, Fan and Huang, Qiang and Yu, Jun},
+  title         = {A Simple Yet Effective Agent for Open-World Aerial Object Search},
+  year          = {2026},
+  eprint        = {2611.34115},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  url           = {https://arxiv.org/abs/2611.34115}
+}
 ```
 
 ## 致谢与许可
